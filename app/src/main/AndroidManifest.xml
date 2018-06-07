@@ -19,6 +19,7 @@
 
         <activity android:name=".PropertyAnimActivity" />
         <activity android:name=".HandwritingActivity" />
+        <activity android:name=".PointAnimation.PointActivity" />
     </application>
 
 </manifest>

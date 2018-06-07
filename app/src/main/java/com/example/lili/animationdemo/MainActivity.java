@@ -1,5 +1,7 @@
 package com.example.lili.animationdemo;
 
+import com.example.lili.animationdemo.PointAnimation.PointActivity;
+
 import java.util.ArrayList;
 
 public class MainActivity extends BaseListActivity {
@@ -14,13 +16,15 @@ public class MainActivity extends BaseListActivity {
         initDisplayList();
     }
 
-    private void initData(){
+    private void initData() {
         mItemsInfo = new ArrayList<>();
 
         ItemComponentInfo info;
         info = new ItemComponentInfo("PropertyAnimation", PropertyAnimActivity.class);
         mItemsInfo.add(info);
         info = new ItemComponentInfo("HandWriting", HandwritingActivity.class);
+        mItemsInfo.add(info);
+        info = new ItemComponentInfo("PointAnim", PointActivity.class);
         mItemsInfo.add(info);
     }
 

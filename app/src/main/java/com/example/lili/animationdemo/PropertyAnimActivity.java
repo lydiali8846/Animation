@@ -21,7 +21,7 @@ import android.widget.TextView;
  * @date 18-5-31
  * @copyright MIBC
  */
-public class PropertyAnimActivity extends AppCompatActivity implements View.OnClickListener{
+public class PropertyAnimActivity extends AppCompatActivity implements View.OnClickListener {
     private TextView txt_anim;
     private LinearLayout ll_object;
 
@@ -32,7 +32,7 @@ public class PropertyAnimActivity extends AppCompatActivity implements View.OnCl
         initView();
     }
 
-    private void initView(){
+    private void initView() {
         txt_anim = findViewById(R.id.shape_red);
         ll_object = findViewById(R.id.ll_object);
         findViewById(R.id.btn_value).setOnClickListener(this);
@@ -47,7 +47,7 @@ public class PropertyAnimActivity extends AppCompatActivity implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_value:
                 valueAnim();
                 break;
@@ -58,17 +58,17 @@ public class PropertyAnimActivity extends AppCompatActivity implements View.OnCl
                 xmlAnimation();
                 break;
             case R.id.alpha:
-                objectAnim("alpha",1f,0f,1f);
+                objectAnim("alpha", 1f, 0f, 1f);
                 break;
             case R.id.rotation:
-                objectAnim("rotation",0f,360f,0f);
+                objectAnim("rotation", 0f, 360f, 0f);
                 break;
             case R.id.translationX:
-                float currentX=txt_anim.getTranslationX();
-                objectAnim("translationX",currentX,-400f,currentX);
+                float currentX = txt_anim.getTranslationX();
+                objectAnim("translationX", currentX, -400f, currentX);
                 break;
             case R.id.scaleY:
-                objectAnim("scaleY",1f,3f,1f);
+                objectAnim("scaleY", 1f, 3f, 1f);
                 break;
             case R.id.animation_set:
                 objectAnimSet();
@@ -77,53 +77,45 @@ public class PropertyAnimActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void valueAnim(){
-        final ValueAnimator animator= ValueAnimator.ofFloat(0f,1f,0f);
+    private void valueAnim() {
+        final ValueAnimator animator = ValueAnimator.ofFloat(0f, 1f, 0f);
         animator.setDuration(2000);
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float currentValue = (float) animation.getAnimatedValue();
-                txt_anim.setScaleY(1+currentValue);
-                txt_anim.setScaleX(1-currentValue);
+                txt_anim.setScaleY(1 + currentValue);
+                txt_anim.setScaleX(1 - currentValue);
                 Log.i("li.li", "MainActivity|onAnimationUpdate:==" + currentValue);
-            }
-        });
-        animator.addListener(new AnimatorListenerAdapter(){
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                animator.cancel();
             }
         });
         animator.start();
     }
 
-    private void objectAnim(String type,float before,float after,float end){
-        final ObjectAnimator objectAnimator=ObjectAnimator.ofFloat(txt_anim,type,before,after,end);
+    private void objectAnim(String type, float before, float after, float end) {
+        final ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(txt_anim, type, before, after, end);
         objectAnimator.setDuration(3000);
         objectAnimator.start();
         objectAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                objectAnimator.cancel();
             }
         });
     }
 
-    private void objectAnimSet(){
-        float currentX=txt_anim.getTranslationX();
-        float currentY=txt_anim.getTranslationY();
-        ObjectAnimator translationX=ObjectAnimator.ofFloat(txt_anim,"translationX",currentX,600f,currentX);
-        ObjectAnimator translationY=ObjectAnimator.ofFloat(txt_anim,"translationY",currentY,-1000f,currentY);
-        ObjectAnimator rotation=ObjectAnimator.ofFloat(txt_anim,"rotation",0,360f);
-        ObjectAnimator alpha=ObjectAnimator.ofFloat(txt_anim,"alpha",1f,0f,1f);
-        ObjectAnimator scaleY=ObjectAnimator.ofFloat(txt_anim,"scaleY",1f,0f,1f);
-        ObjectAnimator scaleX=ObjectAnimator.ofFloat(txt_anim,"scaleX",1f,0f,1f);
-        AnimatorSet set=new AnimatorSet();
+    private void objectAnimSet() {
+        float currentX = txt_anim.getTranslationX();
+        float currentY = txt_anim.getTranslationY();
+        ObjectAnimator translationX = ObjectAnimator.ofFloat(txt_anim, "translationX", currentX, 600f, currentX);
+        ObjectAnimator translationY = ObjectAnimator.ofFloat(txt_anim, "translationY", currentY, -1000f, currentY);
+        ObjectAnimator rotation = ObjectAnimator.ofFloat(txt_anim, "rotation", 0, 360f);
+        ObjectAnimator alpha = ObjectAnimator.ofFloat(txt_anim, "alpha", 1f, 0f, 1f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(txt_anim, "scaleY", 1f, 0f, 1f);
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(txt_anim, "scaleX", 1f, 0f, 1f);
+        AnimatorSet set = new AnimatorSet();
         set.setDuration(2000);
-        set.playTogether(translationX,translationY,rotation,alpha,scaleX,scaleY);
+        set.playTogether(translationX, translationY, rotation, alpha, scaleX, scaleY);
         //set.play(translationX).with(alpha).before(scaleY);
         set.start();
         set.addListener(new AnimatorListenerAdapter() {
@@ -134,21 +126,20 @@ public class PropertyAnimActivity extends AppCompatActivity implements View.OnCl
         });
     }
 
-    private void propertyAnim(){
+    private void propertyAnim() {
         //针对同一个对象多个属性，同时作用多种动画
-        float currentX=txt_anim.getTranslationX();
-        PropertyValuesHolder valuesHolderT = PropertyValuesHolder.ofFloat("translationX", currentX,500f,currentX);
-        PropertyValuesHolder valuesHolderA = PropertyValuesHolder.ofFloat("alpha", 1f, 0.5f,1f);
+        float currentX = txt_anim.getTranslationX();
+        PropertyValuesHolder valuesHolderT = PropertyValuesHolder.ofFloat("translationX", currentX, 500f, currentX);
+        PropertyValuesHolder valuesHolderA = PropertyValuesHolder.ofFloat("alpha", 1f, 0.5f, 1f);
         PropertyValuesHolder valuesHolderX = PropertyValuesHolder.ofFloat("scaleX", 1f, 0, 1f);
         PropertyValuesHolder valuesHolderY = PropertyValuesHolder.ofFloat("scaleY", 1f, 0, 1f);
         ObjectAnimator.ofPropertyValuesHolder(txt_anim, valuesHolderT, valuesHolderA, valuesHolderX, valuesHolderY)
                 .setDuration(5000).start();
-
     }
 
-    private void xmlAnimation(){
+    private void xmlAnimation() {
         @SuppressLint("ResourceType")
-        Animator animator= AnimatorInflater.loadAnimator(this,R.anim.xml_animator);
+        Animator animator = AnimatorInflater.loadAnimator(this, R.anim.xml_animator);
         animator.setTarget(txt_anim);
         animator.start();
     }
