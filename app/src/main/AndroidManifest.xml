@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lili.animationdemo">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -20,6 +21,7 @@
         <activity android:name=".PropertyAnimActivity" />
         <activity android:name=".HandwritingActivity" />
         <activity android:name=".PointAnimation.PointActivity" />
+        <activity android:name=".DragView.DragActivity" />
     </application>
 
 </manifest>
